@@ -8,28 +8,37 @@ args <- commandArgs(TRUE)
 help <- function()
 {
   cat("
-      Summarize and plot cpumemlog.sh output
 
-      2015-01 Gregor Gorjanc
+  Summarize and plot cpumemlog.sh output
 
-      Usage:
+  Usage:
+    cpumemlogplot.R [argument(s)] [file(s)]
 
-        cpumemlogplot.R [argument(s)] [file(s)]
+  Arguments:
+    --help      - print this text
+    --giga,-g   - plot memory usage in GB (default)
+    --mega,-m   - plot memory usage in MB
+    --labels,-l - use directlabels to position process labels onto lines
+                  instead of using a legend
 
-      Arguments:
+  Example:
+    Summarize and plot output stored in file ...
 
-        --help      - print this text
-        --giga,-g   - plot memory usage in GB (default)
-        --mega,-m   - plot memory usage in MB
-        --labels,-l - use directlabels to position process labels onto lines
-                    instead of using a legend
+      cpumemlogplot.R cpumemlog_5026.txt
 
-      Example:
+    Summarize and plot output - show RAM usage in megabytes
 
-        cpumemlogplot.R cpumemlog_5026.txt
-        cpumemlogplot.R --mega cpumemlog_5026.txt
-        cpumemlogplot.R cpumemlog_5026.txt cpumemlog_1000.txt
-      ")
+      cpumemlogplot.R --mega cpumemlog_5026.txt
+
+    Summarize and plot output stored in files ...
+
+      cpumemlogplot.R cpumemlog_5026.txt cpumemlog_1000.txt
+
+  Author
+    Gregor Gorjanc <gregor dot gorjanc at gmail dot com>
+
+  Web
+    http://github.com/gregorgorjanc/cpumemlog\n\n")
   q(save="no")
 }
 

@@ -8,13 +8,13 @@ NAME=$(basename $0)
 usage()
 {
     cat <<EOF
-NAME
+  NAME
     $NAME - Monitor CPU and RAM usage for a given process (and its children)
 
-SYNOPSIS
+  SYNOPSIS
     $NAME pid [string] [-t=1]
 
-DESCRIPTION
+  DESCRIPTION
     pid
       ID of a process that will be monitored; must be the FIRST argument
 
@@ -30,22 +30,25 @@ DESCRIPTION
     -h, --help
       Print this output
 
-EXAMPLE
+  EXAMPLE
     Monitor process with process ID 123 and put this script into background
     to be able to work further in this terminal:
 
-    $NAME 123 &
+      $NAME 123 &
 
     ... and add a string JOB to the output:
 
-    $NAME 123 JOB &
+      $NAME 123 JOB &
 
     ... and collect information every 2 seconds:
 
-    $NAME 123 JOB -t=2 &
+      $NAME 123 JOB -t=2 &
 
-AUTHOR
-    Gregor GORJANC <gregor.gorjanc at gmail.com>
+  AUTHOR
+    Gregor Gorjanc <gregor dot gorjanc at gmail dot com>
+
+  WEB
+    http://github.com/gregorgorjanc/cpumemlog
 
 EOF
 }
@@ -55,15 +58,15 @@ TIME=10
 
 ## Get options
 for OPTION in $@; do
-    case "$OPTION" in
-        -h | --help )
-        usage
-        exit 0
-        ;;
-        -t=* | --time=*)
-        TIME=$(echo $OPTION | sed -e "s/--time=//" -e "s/-t=//")
-        ;;
-    esac
+  case "$OPTION" in
+    -h | --help )
+      usage
+      exit 0
+      ;;
+    -t=* | --time=*)
+      TIME=$(echo $OPTION | sed -e "s/--time=//" -e "s/-t=//")
+      ;;
+  esac
 done
 
 ## Collect PID and STRING
