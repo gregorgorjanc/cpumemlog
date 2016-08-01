@@ -16,8 +16,11 @@ help <- function()
 
   Arguments:
     --help      - print this text
-    --giga,-g   - plot memory usage in GB (default)
-    --mega,-m   - plot memory usage in MB
+
+    --mega,-m   - plot memory usage in MB (GB is default)
+
+    --group,-g  - group process's data by process (command) name
+
     --labels,-l - use directlabels to position process labels onto lines
                   instead of using a legend
 
@@ -53,6 +56,14 @@ if(any(test)) {
   args <- args[!(args %in% c("--mega", "-m"))]
   binPower <- 10
   binUnit <- "Mb"
+}
+
+test <- c("--group", "-g") %in% args
+if(any(test)) {
+  args <- args[!(args %in% c("--group", "-g"))]
+  group <- TRUE
+} else {
+  group <- FALSE
 }
 
 test <- c("--labels", "-l") %in% args
@@ -98,7 +109,10 @@ for(file in args) {
   dat <- dat[!sel, ]
   dat$X <- as.POSIXct(paste(dat$DATE, dat$TIME))
   dat$RSS <- dat$RSS / 2^binPower
-  dat$COMMAND <- paste(dat$COMMAND, as.numeric(factor(paste(dat$COMMAND, dat$PID, sep="_"))), sep="_")
+  if (!group) {
+    dat$COMMAND <- paste(dat$COMMAND, as.numeric(factor(paste(dat$COMMAND, dat$PID, sep="_"))), sep="_")
+  }
+
 
   ## Summarize
   sink(file=paste(file, "mem_stat.txt", sep="_"), split=TRUE)
